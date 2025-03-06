@@ -2,10 +2,14 @@ package com.example.demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 public class ListaCompraDetalleId {
 
     @Column(name = "idListaCompra")
@@ -13,12 +17,5 @@ public class ListaCompraDetalleId {
 
     @Column(name = "idCodigoProducto")
     private Integer idCodigoProducto;
-
-    public ListaCompraDetalleId() {}
-
-    public ListaCompraDetalleId(Integer idListaCompra, Integer idCodigoProducto) {
-        this.idListaCompra = idListaCompra;
-        this.idCodigoProducto = idCodigoProducto;
-    }
 
 }

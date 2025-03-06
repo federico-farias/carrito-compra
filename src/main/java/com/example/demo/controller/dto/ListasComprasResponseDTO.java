@@ -5,10 +5,10 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ListasComprasResponse {
+public class ListasComprasResponseDTO {
 
     private Integer cliente;
 
-    private List<ListaCompraResponse> listas;
+    private List<ListaCompraResponseDTO> listas;
 
 }

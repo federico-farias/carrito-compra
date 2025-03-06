@@ -7,9 +7,9 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class ListaCompraResponse {
+public class ListaCompraResponseDTO {
 
     private String nombreLista;
-    private List<Producto> productos;
+    private List<ProductoDTO> productos;
 
 }
