@@ -9,6 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ListaCompraResponseDTO {
 
+    private Integer id;
     private String nombreLista;
     private List<ProductoDTO> productos;
 

@@ -50,6 +50,7 @@ public class ListaComprasServiceImpl implements ListaComprasService {
 		listaCompra.setNombre(request.getNombreLista());
 		listaCompra.setFechaRegistro(now);
 		listaCompra.setFechaUltimaActualizacion(now);
+		listaCompra.setActivo(true);
 		this.listaCompraRepository.save(listaCompra);
 
 		// No es lo mejor ni lo más optimo, lo que se busca es terminar el flujo.
@@ -60,12 +61,6 @@ public class ListaComprasServiceImpl implements ListaComprasService {
 				productoEncontrado = new Producto();
 				productoEncontrado.setId(productoRequest.getIdProducto());
 			}
-
-			/*
-			// TODO: acá se requiere validar por que obtengo el error: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: La columna "ID_LISTA_COMPRA" no permite valores nulos (NULL)
-			var idListaCompra = listaCompra.getId();
-			this.listaCompraDetalleRepository.insert(idListaCompra, productoEncontrado.getId(), productoRequest.getCantidad());
-			 */
 
 			ListaCompraDetalle detalle = new ListaCompraDetalle();
 			detalle.setIdListaCompra(listaCompra);
@@ -87,7 +82,7 @@ public class ListaComprasServiceImpl implements ListaComprasService {
 		response.setCliente(clienteEncontrado.getIdCliente());
 		response.setListas(new LinkedList<>());
 			
-		var listasDeCompra = this.listaCompraRepository.findBycliente(clienteEncontrado);
+		var listasDeCompra = this.listaCompraRepository.findByClienteAndActivo(clienteEncontrado, true);
 
 		for (var listaCompra: listasDeCompra) {
 			var productos = new LinkedList<ProductoDTO>();
@@ -98,12 +93,23 @@ public class ListaComprasServiceImpl implements ListaComprasService {
 			}
 
 			response.getListas().add(new ListaCompraResponseDTO(
+					listaCompra.getId(),
 					listaCompra.getNombre(),
 					productos
 			));
 		}
 
 		return response;
+	}
+
+	@Override
+	public void eliminarListaComprasPorId(Integer listaComprasId) {
+		var opListaCompra = this.listaCompraRepository.findById(listaComprasId);
+		var listaCompra = opListaCompra.orElseGet(null);
+		if (listaCompra != null) {
+			listaCompra.setActivo(false);
+			this.listaCompraRepository.save(listaCompra);
+		}
 	}
 
 }

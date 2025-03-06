@@ -11,6 +11,6 @@ import com.example.demo.model.ListaCompra;
 @Repository
 public interface ListaCompraRepository extends JpaRepository<ListaCompra, Integer>{
 	
-	List<ListaCompra> findBycliente(Cliente cliente);
+	List<ListaCompra> findByClienteAndActivo(Cliente cliente, Boolean active);
 
 }

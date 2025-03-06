@@ -9,4 +9,5 @@ public interface ListaComprasService {
 
 	ListasComprasResponseDTO findById(Integer clientId);
 
+	void eliminarListaComprasPorId(Integer listaComprasId);
 }
