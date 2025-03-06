@@ -30,7 +30,7 @@ public class Producto {
     @Column(name = "activo")
     private Boolean activo;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "idCodigoProducto")
     private List<ListaCompraDetalle> detalles;
 
 }

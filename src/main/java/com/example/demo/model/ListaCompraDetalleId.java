@@ -6,16 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
-@Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListaCompraDetalleId {
+public class ListaCompraDetalleId implements Serializable {
 
-    @Column(name = "idListaCompra")
     private Integer idListaCompra;
-
-    @Column(name = "idCodigoProducto")
     private Integer idCodigoProducto;
 
 }

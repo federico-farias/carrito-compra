@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.example.demo.controller.dto.ListaCompraResponseDTO;
 import com.example.demo.controller.dto.ListasComprasResponseDTO;
+import com.example.demo.controller.dto.ProductoDTO;
 import com.example.demo.model.*;
 import com.example.demo.repository.ListaCompraDetalleRepository;
 import com.example.demo.repository.ProductoRepository;
@@ -60,8 +61,17 @@ public class ListaComprasServiceImpl implements ListaComprasService {
 				productoEncontrado.setId(productoRequest.getIdProducto());
 			}
 
+			/*
 			// TODO: acá se requiere validar por que obtengo el error: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: La columna "ID_LISTA_COMPRA" no permite valores nulos (NULL)
-			this.listaCompraDetalleRepository.insert(listaCompra.getId(), productoEncontrado.getId(), productoRequest.getCantidad());
+			var idListaCompra = listaCompra.getId();
+			this.listaCompraDetalleRepository.insert(idListaCompra, productoEncontrado.getId(), productoRequest.getCantidad());
+			 */
+
+			ListaCompraDetalle detalle = new ListaCompraDetalle();
+			detalle.setIdListaCompra(listaCompra);
+			detalle.setIdCodigoProducto(productoEncontrado);
+			detalle.setCantidad(productoRequest.getCantidad());
+			this.listaCompraDetalleRepository.save(detalle);
 		}
 
 	}
@@ -80,9 +90,16 @@ public class ListaComprasServiceImpl implements ListaComprasService {
 		var listasDeCompra = this.listaCompraRepository.findBycliente(clienteEncontrado);
 
 		for (var listaCompra: listasDeCompra) {
+			var productos = new LinkedList<ProductoDTO>();
+			var detalles = listaCompra.getDetalles();
+
+			for (var detalle : detalles) {
+				productos.add(new ProductoDTO(detalle.getIdCodigoProducto().getId(), detalle.getCantidad()));
+			}
+
 			response.getListas().add(new ListaCompraResponseDTO(
 					listaCompra.getNombre(),
-					new LinkedList<>()
+					productos
 			));
 		}
 

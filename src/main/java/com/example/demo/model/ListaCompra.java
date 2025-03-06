@@ -44,7 +44,7 @@ public class ListaCompra {
     @Column(name = "activo")
     private Boolean activo;
 
-    @OneToMany(mappedBy = "listaCompra")
+    @OneToMany(mappedBy = "idListaCompra")
     private List<ListaCompraDetalle> detalles;
 
 }

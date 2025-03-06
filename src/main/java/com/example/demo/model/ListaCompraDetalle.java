@@ -1,31 +1,28 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "ListaCompraDetalle")
+@IdClass(ListaCompraDetalleId.class)
 public class ListaCompraDetalle {
 
-    @EmbeddedId
-    private ListaCompraDetalleId id;
+    //@EmbeddedId
+    //private ListaCompraDetalleId id;
 
+    @Id
     @ManyToOne
-    @MapsId("idListaCompra")
+    //@MapsId("idListaCompra")
     @JoinColumn(name = "idListaCompra", nullable = false)
-    private ListaCompra listaCompra;
+    private ListaCompra idListaCompra;
 
+    @Id
     @ManyToOne
-    @MapsId("idCodigoProducto")
+    //@MapsId("idCodigoProducto")
     @JoinColumn(name = "idCodigoProducto", nullable = false)
-    private Producto producto;
+    private Producto idCodigoProducto;
 
     @Column(name = "cantidad")
     private Integer cantidad;
