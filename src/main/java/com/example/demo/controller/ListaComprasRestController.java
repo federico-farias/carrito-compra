@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.dto.ListasComprasResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.controller.request.ListaComprasRequest;
+import com.example.demo.controller.dto.ListaComprasRequest;
 import com.example.demo.service.ListaComprasService;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class ListaComprasRestController {
 	}
 	
 	@GetMapping("/cliente/{clientId}")
-	public ResponseEntity<ListaComprasRequest> findById(@PathVariable Integer clientId) {
+	public ResponseEntity<ListasComprasResponse> findById(@PathVariable Integer clientId) {
 		return ResponseEntity.ok(this.service.findById(clientId));
 	}
 

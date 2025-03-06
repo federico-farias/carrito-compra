@@ -1,4 +1,4 @@
-package com.example.demo.controller.request;
+package com.example.demo.controller.dto;
 
 import java.util.List;
 

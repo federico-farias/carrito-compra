@@ -1,11 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.controller.request.ListaComprasRequest;
+import com.example.demo.controller.dto.ListaComprasRequest;
+import com.example.demo.controller.dto.ListasComprasResponse;
 
 public interface ListaComprasService {
 	
-	public void create(ListaComprasRequest request);
+	void create(ListaComprasRequest request);
 
-	public ListaComprasRequest findById(Integer clientId);
+	ListasComprasResponse findById(Integer clientId);
 
 }
